@@ -26,6 +26,45 @@ def max_init(car_list):
     print(car_dic)
     return car_dic
 
+def max_init(car_list):
+    car_dic = {}
+    maximum = 0
+    for car in car_list:
+        if len(car) >= maximum:
+            maximum = len(car)
+
+    for index in range(maximum):
+        print(index)
+        temp = {}
+        for car in car_list:
+            if len(car)-1>= index:
+                if car[index] not in temp.keys():
+                    temp[car[index]] = 0
+                temp[car[index]] += 1
+        for key in temp.keys():
+            if key not in car_dic:
+                car_dic[key] = []
+            car_dic[key].append(temp[key])
+
+    print(car_dic)
+    for each_1 in car_dic.keys():
+        car_dic[each_1] = max(car_dic[each_1])
+    print(car_dic)
+    return car_dic
+
+
+def max_thari(path_list,street,I):
+    for intersection in range(I):
+        ap_streets = []
+        for road in street:
+            if(road[1] == intersection):
+                ap_streets.append(road[2])
+
+
+    #for each in street:
+    #    name = each[2]
+
+
 
 if __name__ == "__main__":
     root = 'D:/Hashcode/2021/qulification round/'
