@@ -5,6 +5,8 @@ if __name__ == "__main__":
     file_path = 'a.txt'
     list_data_lines = []
     name_enc = {}
+    inter_cnt = {}
+    path_inter = {}
     desc_street = []
     desc_path = []
     with open(root+file_path, 'r') as pf:
@@ -17,12 +19,21 @@ if __name__ == "__main__":
             D, I, S, V, F = [int(j) for j in list_data_lines[i]]
         elif i < S+1:
             B, E, name, L = list_data_lines[i]
+
             try:
                 enc = name_enc[name]
             except:
                 enc = n
                 n +=1
                 name_enc[name] = enc
+
+            try:
+                inter_cnt[E] += 1
+                path_inter[E].append(enc)
+            except:
+                inter_cnt[E] = 1
+                path_inter[E] = [enc]
+
             desc_street.append([int(B), int(E), enc, int(L)])
         else:
             P, *names = list_data_lines[i]
