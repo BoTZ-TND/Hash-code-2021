@@ -8,7 +8,6 @@ def max_init(car_list):
             maximum = len(car)
 
     for index in range(maximum):
-        print(index)
         temp = {}
         for car in car_list:
             if len(car)-1>= index:
@@ -20,16 +19,23 @@ def max_init(car_list):
                 car_dic[key] = []
             car_dic[key].append(temp[key])
 
-    print(car_dic)
     for each_1 in car_dic.keys():
         car_dic[each_1] = max(car_dic[each_1])
-    print(car_dic)
     return car_dic
 
+def output(dic):
+    st = ""
+    st += str(I)+'\n'
+    for i in range(I):
+        st += str(i)+'\n'
+        st += str(inter_cnt[i])+'\n'
+        for j in path_inter[i]:
+            st += f'{reverse_enc[j]} {dic[j]}\n'
+    return st
 
 if __name__ == "__main__":
-    root = 'D:/Hashcode/2021/qulification round/'
-    file_path = 'a.txt'
+    root = 'F:/JetBrain Project Files/Pycharm/Hash-code-2021/qulification round/'
+    file_path = 'b.txt'
     list_data_lines = []
     name_enc = {}
     inter_cnt = {}
@@ -46,7 +52,7 @@ if __name__ == "__main__":
             D, I, S, V, F = [int(j) for j in list_data_lines[i]]
         elif i < S + 1:
             B, E, name, L = list_data_lines[i]
-
+            E = int(E)
             try:
                 enc = name_enc[name]
             except:
@@ -75,9 +81,10 @@ if __name__ == "__main__":
                 enc_list.append(enc)
             desc_path.append([int(P), ] + enc_list)
     reverse_enc = dict(zip(name_enc.values(), name_enc.keys()))
-    print(desc_path)
-    print(desc_street)
-    print(name_enc)
-    print(reverse_enc)
 
-    max_init(desc_path)
+    max_dict = max_init(desc_path)
+
+    with open(root+'test2.txt','w') as pf:
+       pf.write(output(max_dict))
+
+
